@@ -1,9 +1,9 @@
 Gem::Specification.new do |s|
-  s.name        = 'MobileID'
-  s.version     = '0.0.1'
+  s.name        = 'mobile_id'
+  s.version     = '0.0.2'
   s.date        = '2020-09-22'
   s.summary     = "Estonia Mobile ID authentication"
-  s.description = "Estonia Mobile ID authentication, more info at https://www.id.ee/en/"
+  s.description = "Estonia Mobile ID authentication"
   s.authors     = ["Priit Tark"]
   s.email       = 'priit@gitlab.eu'
   s.files       = ["lib/mobile_id.rb"]
