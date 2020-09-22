@@ -1,0 +1,10 @@
+et:
+  mobile_id:
+    some_error: Tekkis viga
+    timeout: "Mobiil-ID sisselogimine aegus"
+    user_is_not_mobile_id_client: Kasutaja ei ole Mobiil-ID klient
+    user_cancelled: Kasutaja katkestas Mobiil-ID sisselogimise.
+    signature_hash_mismatch: "Mobiil-ID digiallkiri on vigane. Palun pöörduge oma mobiilioperaatori poole."
+    phone_absent: Kasutaja telefon ei asu levipiirkonnas või on välja lülitatud.
+    delivery_error: Mobiil-ID SMS saatmisel tekkis viga.
+    sim_error: Mobiil-ID telefoni SIM viga.

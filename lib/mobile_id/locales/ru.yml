@@ -1,0 +1,10 @@
+ru:
+  mobile_id:
+    some_error: Была некоторая ошибка
+    timeout: "Mobile-ID session got timeout"
+    user_is_not_mobile_id_client: User is not Mobile-ID client.
+    user_cancelled: User cancelled the Mobile ID operation
+    signature_hash_mismatch: "Mobile-ID has signiture issue. User needs to contact his/her mobile operator."
+    phone_absent: Mobile-ID SIM not available
+    delivery_error: Mobile-ID SMS sending error.
+    sim_error: Invalid response from Mobile-ID SIM card
