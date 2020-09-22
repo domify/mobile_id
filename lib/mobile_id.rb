@@ -5,7 +5,11 @@ require 'digest'
 require 'httparty'
 require 'active_support/core_ext/hash/indifferent_access'
 require 'i18n'
-require 'mobile_id/railtie' if defined?(Rails)
+if defined?(Rails)
+  require 'mobile_id/railtie' 
+else
+  I18n.load_path << Dir[File.expand_path("lib/mobile_id/locales") + "/*.yml"]
+end
 
 class MobileId
   class Error < StandardError; end
@@ -26,9 +30,6 @@ class MobileId
     self.hash = Digest::SHA256.base64digest(SecureRandom.uuid)
   end
 
-  #
-  # Authentication message
-  #
   def authenticate!(phone_calling_code: nil, phone:, personal_code:, language: nil, display_text: nil)
     phone_calling_code ||= '+372'
     full_phone = "#{phone_calling_code}#{phone}"
@@ -38,10 +39,10 @@ class MobileId
         display_text ||= 'Autentimine' 
         'EST'
       when :ru
-        display_text ||= 'Authentication' 
+        display_text ||= 'Аутентификация' 
         'RUS'
       else
-        display_text ||= 'Аутентификация' 
+        display_text ||= 'Authentication' 
         'ENG'
       end
     
@@ -64,7 +65,7 @@ class MobileId
     }
 
     response = HTTParty.post(url + '/authentication', options)
-    raise Error, "#{I18n.t('mobile_id.some_error')} #{auth_response}" unless response.code == 200
+    raise Error, "#{I18n.t('mobile_id.some_error')} #{response}" unless response.code == 200
 
     ActiveSupport::HashWithIndifferentAccess.new(
       session_id: response['sessionID'],
