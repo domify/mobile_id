@@ -25,8 +25,8 @@ Execute irb:
     $ bundle exec irb
     irb(main):001:0> require 'mobile_id'
     => true
-    irb(main):002:0> @mid = MobileId.new(live: false)
-    => #<MobileId:0x000055ac4cb25630 @url="https://tsp.demo.sk.ee/mid-api", @uuid="00000000-0000-0000-0000-000000000000", @name="DEMO", @hash="two+e7UMoFCAXHo8q9AnWqSC58Hhil74RowY8Gg9xQY=">
+    irb(main):002:0> @mid = MobileId::Auth.new(live: false)
+    => #<MobileId::Auth:0x000055ac4cb25630 @url="https://tsp.demo.sk.ee/mid-api", @uuid="00000000-0000-0000-0000-000000000000", @name="DEMO", @hash="two+e7UMoFCAXHo8q9AnWqSC58Hhil74RowY8Gg9xQY=">
     irb(main):003:0> auth = @mid.authenticate!(phone: '00000766', personal_code: '60001019906')
     => {"session_id"=>"34e7eff0-691b-4fad-9798-8db680587b18", "phone"=>"00000766", "phone_calling_code"=>"+372"}
     irb(main):004:0> verify = @mid.verify!(auth)
@@ -40,7 +40,7 @@ You get verified attributes: personal_code, first_name, last_name, phone, phone_
 For live usage, add your relyingPartyUUID (RPUUID) and relyingPartyName what you get from https://www.sk.ee
 
 ```ruby
-    @mid = MobileId.new(live: true, uuid: "39e7eff0-241b-4fad-2798-9db680587b20", name: 'My service name')
+    @mid = MobileId::Auth.new(live: true, uuid: "39e7eff0-241b-4fad-2798-9db680587b20", name: 'My service name')
 ```
 
 Rails with Devise example controller:

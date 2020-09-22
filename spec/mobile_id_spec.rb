@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe MobileId do
   before do 
-    @mid = MobileId.new(live: false)
+    @mid = MobileId::Auth.new(live: false)
   end
 
   it 'should init hash' do
