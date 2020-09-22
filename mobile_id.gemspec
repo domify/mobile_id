@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Priit Tark"]
   s.email       = 'priit@gitlab.eu'
   s.files       = ["lib/mobile_id.rb"]
-  s.homepage    = 'https://rubygems.org/gems/mobile_id'
+  s.homepage    = 'https://github.com/gitlabeu/mobile_id'
   s.license     = 'MIT'
   s.add_runtime_dependency 'httparty'
   s.add_runtime_dependency 'openssl', '>= 2.2.0'
