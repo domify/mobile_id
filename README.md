@@ -113,6 +113,11 @@ After checking out the repo, run `bundle` to install dependencies. For testing c
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/gitlabeu/mobile_id
 
+## Roadmap
+
+* Document sign
+* Rails generators
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).

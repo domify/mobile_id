@@ -1,12 +1,12 @@
 Gem::Specification.new do |s|
   s.name        = 'mobile_id'
-  s.version     = '0.0.2'
+  s.version     = '0.0.3'
   s.date        = '2020-09-22'
   s.summary     = "Estonia Mobile ID authentication"
   s.description = "Estonia Mobile ID authentication"
   s.authors     = ["Priit Tark"]
   s.email       = 'priit@gitlab.eu'
-  s.files       = ["lib/mobile_id.rb"]
+  s.files       = Dir.glob("{lib}/**/*") + %w(MIT-LICENSE README.md CHANGELOG.md)
   s.homepage    = 'https://github.com/gitlabeu/mobile_id'
   s.license     = 'MIT'
   s.add_runtime_dependency 'httparty'
