@@ -16,7 +16,6 @@ module MobileId
       end
 
       def test_store
-        binding.pry
         @test_store ||= 
           build_store([
             File.join(root_path, 'TEST_of_EE_Certification_Centre_Root_CA.pem.crt'),

@@ -1,3 +1,6 @@
+Release 0.0.7
+* Cert cleanup
+
 Release 0.0.6
 * Cert path fix
 
