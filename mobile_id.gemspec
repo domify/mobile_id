@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'mobile_id'
-  s.version     = '0.0.7'
+  s.version     = '0.0.8'
   s.date        = '2020-09-22'
   s.summary     = "Estonia Mobile ID authentication"
   s.description = "Estonia Mobile ID authentication"

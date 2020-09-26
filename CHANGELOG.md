@@ -1,4 +1,7 @@
 Release 0.0.7
+* Release cleanup
+*
+Release 0.0.7
 * Cert cleanup
 
 Release 0.0.6
