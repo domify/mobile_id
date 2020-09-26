@@ -17,4 +17,5 @@ module MobileId
   LOCALES = [:en, :et, :ru]
 end
 
+require 'mobile_id/cert'
 require 'mobile_id/auth'

@@ -1,3 +1,6 @@
+Release 0.0.5
+* Added user certificate validation 
+
 Release 0.0.4
 * Refactored MobileId to MobileId::Auth
 

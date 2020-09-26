@@ -109,12 +109,18 @@ end
 
 After checking out the repo, run `bundle` to install dependencies. For testing code, run `rspec`
 
+## Contributors
+
+* Priit Tark
+* Andri Möll for pointing out user signature issue
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/gitlabeu/mobile_id
 
 ## Roadmap
 
+* Auth signature validation
 * Document sign
 * Rails generators
 

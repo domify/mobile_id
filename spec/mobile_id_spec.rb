@@ -43,6 +43,6 @@ describe MobileId do
   end
 
   it 'should raise error with response code' do
-    lambda { @mid.long_poll!(session_id: 'wrongid') }.should raise_error(MobileId::Error, /There was some error 400/)
+    lambda { @mid.long_poll!(session_id: 'wrongid', doc: '') }.should raise_error(MobileId::Error, /There was some error 400/)
   end
 end

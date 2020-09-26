@@ -9,13 +9,20 @@ module MobileId
     TEST_UUID  = "00000000-0000-0000-0000-000000000000"
     TEST_NAME  = "DEMO"
 
-    attr_accessor :url, :uuid, :name, :hash, :cert, :cert_subject
+    attr_accessor :url, :uuid, :name, :doc, :hash, :user_cert, :live
 
     def initialize(live:, uuid: nil, name: nil)
       self.url = live == true ? LIVE_URL : TEST_URL
       self.uuid = live == true ? uuid : TEST_UUID
       self.name = live == true ? name : TEST_NAME
-      self.hash = Digest::SHA256.base64digest(SecureRandom.uuid)
+      self.live = live
+      init_doc(SecureRandom.uuid)
+    end
+
+    def init_doc(doc)
+      self.doc = doc
+
+      self.hash = Digest::SHA256.base64digest(self.doc)
     end
 
     def authenticate!(phone_calling_code: nil, phone:, personal_code:, language: nil, display_text: nil)
@@ -58,12 +65,13 @@ module MobileId
       ActiveSupport::HashWithIndifferentAccess.new(
         session_id: response['sessionID'],
         phone: phone,
-        phone_calling_code: phone_calling_code
+        phone_calling_code: phone_calling_code,
+        doc: doc
       )
     end
 
     def verify!(auth)
-      long_poll!(session_id: auth['session_id'])
+      long_poll!(session_id: auth['session_id'], doc: auth['doc'])
 
       ActiveSupport::HashWithIndifferentAccess.new(
         personal_code: personal_code,
@@ -75,7 +83,7 @@ module MobileId
       )
     end
 
-    def long_poll!(session_id:)
+    def long_poll!(session_id:, doc:)
       response = HTTParty.get(url + "/authentication/session/#{session_id}")
       raise Error, "#{I18n.t('mobile_id.some_error')} #{response.code} #{response}" if response.code != 200
 
@@ -100,9 +108,9 @@ module MobileId
         raise Error, message
       end
 
-      self.cert = OpenSSL::X509::Certificate.new(Base64.decode64(response['cert']))
-      self.cert_subject = build_cert_subject
-      cert
+      @user_cert = MobileId::Cert.new(response['cert'], live: live)
+      @user_cert.verify_signature!(response['signature']['value'], doc)
+      self.user_cert = @user_cert
     end
 
     def verification_code
@@ -110,41 +118,30 @@ module MobileId
     end
 
     def given_name
-      cert_subject["GN"].tr(",", " ")
+      user_cert.given_name
     end
     alias first_name given_name
 
     def surname
-      cert_subject["SN"].tr(",", " ")
+      user_cert.surname
     end
     alias last_name surname
     
     def country
-      cert_subject["C"].tr(",", " ")
+      user_cert.country
     end
 
     def common_name
-      cert_subject["CN"]
+      user_cert.common_name
     end
 
     def organizational_unit
-      cert_subject["OU"]
+      user_cert.organizational_unit
     end
 
     def serial_number
-      cert_subject["serialNumber"]
+      user_cert.serial_number
     end
     alias personal_code serial_number
-
-    private
-
-    def build_cert_subject
-      self.cert_subject = cert.subject.to_utf8.split(/(?<!\\)\,+/).each_with_object({}) do |c, result|
-        next unless c.include?("=")
-
-        key, val = c.split("=")
-        result[key] = val
-      end
-    end
   end
 end
