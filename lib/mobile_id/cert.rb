@@ -4,22 +4,23 @@ module MobileId
   class Cert
     class << self
       def root_path
-        @root_path ||= (File.expand_path('lib/mobile_id/certs/') + '/')
+        @root_path ||= File.expand_path('certs', __dir__)
       end
 
       def live_store
         @live_store ||= 
           build_store([
-            root_path + 'EE_Certification_Centre_Root_CA.pem.crt',
-            root_path + 'ESTEID-SK_2015.pem.crt'
+            File.join(root_path, 'EE_Certification_Centre_Root_CA.pem.crt'),
+            File.join(root_path, 'ESTEID-SK_2015.pem.crt')
           ])
       end
 
       def test_store
+        binding.pry
         @test_store ||= 
           build_store([
-            root_path + 'TEST_of_EE_Certification_Centre_Root_CA.pem.crt',
-            root_path + 'TEST_of_ESTEID-SK_2015.pem.crt'
+            File.join(root_path, 'TEST_of_EE_Certification_Centre_Root_CA.pem.crt'),
+            File.join(root_path, 'TEST_of_ESTEID-SK_2015.pem.crt')
           ])
       end
 

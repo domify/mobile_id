@@ -1,3 +1,6 @@
+Release 0.0.6
+* Cert path fix
+
 Release 0.0.5
 * Added user certificate validation 
 
