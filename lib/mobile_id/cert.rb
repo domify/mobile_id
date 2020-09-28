@@ -47,9 +47,16 @@ module MobileId
       true
     end
 
-    def verify_signature!(signature, doc)
-      # TODO OpenSSL does not parse signature
-      # cert.public_key.verify(OpenSSL::Digest::SHA256.new, signature, doc)
+    def verify_signature!(signature_base64, doc)
+      signature = Base64.decode64(signature_base64)
+      digest = OpenSSL::Digest::SHA256.new(doc)
+
+      # cert.public_key.verify(digest, signature, doc)
+
+      # TODO OpenSSL does not parse signature correctly
+      # pry(#<MobileId::Cert>)> cert.public_key.verify(digest, signature, doc)
+      # OpenSSL::PKey::PKeyError: EVP_VerifyFinal: nested asn1 error
+      # from (pry):4:in `verify'
     end
 
     def given_name
