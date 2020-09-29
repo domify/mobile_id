@@ -45,4 +45,11 @@ describe MobileId do
   it 'should raise error with response code' do
     lambda { @mid.long_poll!(session_id: 'wrongid', doc: '') }.should raise_error(MobileId::Error, /There was some error 400/)
   end
+
+  it 'should calculate verification code' do
+    @mid = MobileId::Auth.new(live: false)
+    
+    @mid.init_doc('test')
+    @mid.verification_code.should == '5000'
+  end
 end

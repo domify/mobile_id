@@ -1,6 +1,9 @@
-Release 0.0.7
+Release 0.0.9
+* Fixed verification code
+
+Release 0.0.8
 * Release cleanup
-*
+
 Release 0.0.7
 * Cert cleanup
 

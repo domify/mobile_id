@@ -16,13 +16,12 @@ module MobileId
       self.uuid = live == true ? uuid : TEST_UUID
       self.name = live == true ? name : TEST_NAME
       self.live = live
-      init_doc(SecureRandom.uuid)
+      init_doc(SecureRandom.hex(40))
     end
 
     def init_doc(doc)
       self.doc = doc
-
-      self.hash = Digest::SHA256.base64digest(self.doc)
+      self.hash = Digest::SHA256.digest(doc)
     end
 
     def authenticate!(phone_calling_code: nil, phone:, personal_code:, language: nil, display_text: nil)
@@ -51,7 +50,7 @@ module MobileId
           relyingPartyName: name,
           phoneNumber: full_phone.to_s.strip,
           nationalIdentityNumber: personal_code.to_s.strip,
-          hash: hash,
+          hash: Base64.strict_encode64(hash),
           hashType: 'SHA256',
           language: language,
           displayText: display_text,
@@ -114,7 +113,8 @@ module MobileId
     end
 
     def verification_code
-      format("%04d", (Digest::SHA2.new(256).digest(Base64.decode64(hash))[-2..-1].unpack1('n') % 10000))
+      binary = hash.unpack('B*').first
+      "%04d" % (binary[0...6] + binary[-7..-1]).to_i(2)
     end
 
     def given_name
