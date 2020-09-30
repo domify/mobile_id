@@ -1,3 +1,6 @@
+Release 0.0.10
+* Allow live certs verification in test env
+
 Release 0.0.9
 * Fixed verification code
 

@@ -39,9 +39,13 @@ module MobileId
     end
 
     def verify!(cert, live:)
-      store = live == true ? self.class.live_store : self.class.test_store
-      raise Error, 'User certificate is not valid' unless store.verify(cert)
-      raise Error, 'User certificate is not valid' unless cert.public_key.check_key
+      if live == true
+        raise Error, 'User certificate is not valid' unless self.class.live_store.verify(cert)
+      else
+        raise Error, 'User certificate is not valid' unless self.class.test_store.verify(cert) || self.class.live_store.verify(cert)
+      end
+
+      raise Error, 'User certificate is not valid [check_key]' unless cert.public_key.check_key
       raise Error, 'User certificate is expired' unless (cert.not_before..cert.not_after) === Time.now
 
       true
