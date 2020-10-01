@@ -113,7 +113,7 @@ module MobileId
     end
 
     def verification_code
-      binary = hash.unpack('B*').first
+      binary = hash.to_s.unpack('B*').first
       "%04d" % (binary[0...6] + binary[-7..-1]).to_i(2)
     end
 

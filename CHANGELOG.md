@@ -1,3 +1,6 @@
+Release 0.0.11
+* Add more live SK certs
+
 Release 0.0.10
 * Allow live certs verification in test env
 
