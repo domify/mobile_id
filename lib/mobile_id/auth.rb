@@ -82,11 +82,24 @@ module MobileId
       )
     end
 
-    def long_poll!(session_id:, doc:)
+    def session_request(session_id)
       response = HTTParty.get(url + "/authentication/session/#{session_id}")
       raise Error, "#{I18n.t('mobile_id.some_error')} #{response.code} #{response}" if response.code != 200
+      response
+    end
 
-      if response['state'] == 'COMPLETE' && response['result'] != 'OK'
+    def long_poll!(session_id:, doc:)
+      response = nil
+
+      # Retries until RUNNING state turns to COMPLETE 
+      30.times do |i|
+        response = session_request(session_id)
+        break if response['state'] == 'COMPLETE'
+        sleep 1
+      end
+      raise Error, "#{I18n.t('mobile_id.some_error')} #{response.code} #{response}" if response['state'] != 'COMPLETE'
+
+      if response['result'] != 'OK'
         message = 
           case response['result']
           when "TIMEOUT"
@@ -104,7 +117,7 @@ module MobileId
           when "SIM_ERROR"
             I18n.t('mobile_id.sim_error')
           end
-        raise Error, message
+          raise Error, message
       end
 
       @user_cert = MobileId::Cert.new(response['cert'], live: live)

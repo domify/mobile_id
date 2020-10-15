@@ -1,3 +1,7 @@
+Release 0.0.12
+* Supports session RUNNING state
+* Validate auth signature
+
 Release 0.0.11
 * Add more live SK certs
 

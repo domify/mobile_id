@@ -65,10 +65,23 @@ module MobileId
       signature = Base64.decode64(signature_base64)
       digest = OpenSSL::Digest::SHA256.new(doc)
 
-      # cert.public_key.verify(digest, signature, doc)
+      valid =
+        begin
+          cert.public_key.verify(digest, signature, doc)
+        rescue OpenSSL::PKey::PKeyError
+          der_signature = cvc_to_der(signature) # Probably signature is CVC encoded
+          cert.public_key.verify(digest, der_signature, doc)
+        end
 
-      # TODO OpenSSL does not parse signature correctly
-      # OpenSSL::PKey::PKeyError: EVP_VerifyFinal: nested asn1 error
+      raise Error, 'We could not verify user signature' unless valid
+    end
+
+    def cvc_to_der(cvc)
+      sign_hex = cvc.unpack('H*').first
+      half = sign_hex.size / 2
+      i = [OpenSSL::ASN1::Integer.new(sign_hex[0...half].to_i(16)), OpenSSL::ASN1::Integer.new(sign_hex[half..sign_hex.size].to_i(16))]
+      seq = OpenSSL::ASN1::Sequence.new(i)
+      seq.to_der
     end
 
     def given_name

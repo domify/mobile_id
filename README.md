@@ -113,6 +113,7 @@ After checking out the repo, run `bundle` to install dependencies. For testing c
 
 * Priit Tark
 * Andri Möll for pointing out user signature issue
+* Juri Linkov for pointing out unpack method issue
 
 ## Contributing
 
@@ -120,7 +121,6 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/gitlab
 
 ## Roadmap
 
-* Auth signature validation
 * Document sign
 * Rails generators
 

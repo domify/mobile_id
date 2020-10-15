@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mobile_id (0.0.10)
+    mobile_id (0.0.12)
       activesupport
       httparty
       i18n
