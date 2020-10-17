@@ -1,3 +1,5 @@
+* More precise sert check
+
 Release 0.0.12
 * Supports session RUNNING state
 * Validate auth signature

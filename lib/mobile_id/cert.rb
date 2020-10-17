@@ -56,7 +56,7 @@ module MobileId
       end
 
       raise Error, 'User certificate is not valid [check_key]' unless cert.public_key.check_key
-      raise Error, 'User certificate is expired' unless (cert.not_before..cert.not_after) === Time.now
+      raise Error, 'User certificate is expired' unless (cert.not_before...cert.not_after) === Time.now
 
       true
     end
