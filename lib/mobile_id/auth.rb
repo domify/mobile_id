@@ -11,12 +11,12 @@ module MobileId
 
     attr_accessor :url, :uuid, :name, :doc, :hash, :user_cert, :live
 
-    def initialize(live:, uuid: nil, name: nil)
+    def initialize(live:, uuid: nil, name: nil, doc: nil)
       self.url = live == true ? LIVE_URL : TEST_URL
       self.uuid = live == true ? uuid : TEST_UUID
       self.name = live == true ? name : TEST_NAME
       self.live = live
-      init_doc(SecureRandom.hex(40))
+      init_doc(doc || SecureRandom.hex(40))
     end
 
     def init_doc(doc)
