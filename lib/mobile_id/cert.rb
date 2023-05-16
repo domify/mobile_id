@@ -2,37 +2,39 @@
 
 module MobileId
   class Cert
-
     class << self
-
       def root_path
         @root_path ||= File.expand_path('certs', __dir__)
       end
 
       def live_store
         @live_store ||=
-          build_store([
-                        File.join(root_path, 'EE_Certification_Centre_Root_CA.pem.crt'),
-                        File.join(root_path, 'EE-GovCA2018.pem.crt'),
-                        File.join(root_path, 'EID-SK_2011.pem.crt'),
-                        File.join(root_path, 'EID-SK_2016.pem.crt'),
-                        File.join(root_path, 'esteid2018.pem.crt'),
-                        File.join(root_path, 'ESTEID-SK_2011.pem.crt'),
-                        File.join(root_path, 'ESTEID-SK_2015.pem.crt'),
-                        File.join(root_path, 'KLASS3-SK_2010_EECCRCA.pem.crt'),
-                        File.join(root_path, 'KLASS3-SK_2010_EECCRCA_SHA384.pem.crt'),
-                        File.join(root_path, 'KLASS3-SK_2016_EECCRCA_SHA384.pem.crt'),
-                        File.join(root_path, 'KLASS3-SK.pem.crt'),
-                        File.join(root_path, 'NQ-SK_2016.pem.crt')
-                      ])
+          build_store(
+            [
+              File.join(root_path, 'EE_Certification_Centre_Root_CA.pem.crt'),
+              File.join(root_path, 'EE-GovCA2018.pem.crt'),
+              File.join(root_path, 'EID-SK_2011.pem.crt'),
+              File.join(root_path, 'EID-SK_2016.pem.crt'),
+              File.join(root_path, 'esteid2018.pem.crt'),
+              File.join(root_path, 'ESTEID-SK_2011.pem.crt'),
+              File.join(root_path, 'ESTEID-SK_2015.pem.crt'),
+              File.join(root_path, 'KLASS3-SK_2010_EECCRCA.pem.crt'),
+              File.join(root_path, 'KLASS3-SK_2010_EECCRCA_SHA384.pem.crt'),
+              File.join(root_path, 'KLASS3-SK_2016_EECCRCA_SHA384.pem.crt'),
+              File.join(root_path, 'KLASS3-SK.pem.crt'),
+              File.join(root_path, 'NQ-SK_2016.pem.crt')
+            ]
+          )
       end
 
       def test_store
         @test_store ||=
-          build_store([
-                        File.join(root_path, 'TEST_of_EE_Certification_Centre_Root_CA.pem.crt'),
-                        File.join(root_path, 'TEST_of_ESTEID-SK_2015.pem.crt')
-                      ])
+          build_store(
+            [
+              File.join(root_path, 'TEST_of_EE_Certification_Centre_Root_CA.pem.crt'),
+              File.join(root_path, 'TEST_of_ESTEID-SK_2015.pem.crt')
+            ]
+          )
       end
 
       def build_store(paths)
@@ -43,14 +45,13 @@ module MobileId
         end
         store
       end
-
     end
 
     attr_accessor :cert, :subject
 
     def initialize(base64_cert, live:)
       self.cert = OpenSSL::X509::Certificate.new(Base64.decode64(base64_cert))
-      verify!(cert, live:)
+      verify!(cert, live: live)
       build_cert_subject
     end
 
@@ -131,6 +132,5 @@ module MobileId
         result[key] = val
       end
     end
-
   end
 end

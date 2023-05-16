@@ -2,7 +2,6 @@
 
 module MobileId
   class Auth
-
     # API documentation https://github.com/SK-EID/MID
     LIVE_URL = 'https://mid.sk.ee/mid-api'
     TEST_URL = 'https://tsp.demo.sk.ee/mid-api'
@@ -53,7 +52,7 @@ module MobileId
           nationalIdentityNumber: personal_code.to_s.strip,
           hash: Base64.strict_encode64(hash),
           hashType: 'SHA256',
-          language:,
+          language: language,
           displayText: display_text,
           displayTextFormat: 'GSM-7' # or "UCS-2”
         }.to_json
@@ -64,9 +63,9 @@ module MobileId
 
       ActiveSupport::HashWithIndifferentAccess.new(
         session_id: response['sessionID'],
-        phone:,
-        phone_calling_code:,
-        doc:
+        phone: phone,
+        phone_calling_code: phone_calling_code,
+        doc: doc
       )
     end
 
@@ -74,9 +73,9 @@ module MobileId
       long_poll!(session_id: auth['session_id'], doc: auth['doc'])
 
       ActiveSupport::HashWithIndifferentAccess.new(
-        personal_code:,
-        first_name:,
-        last_name:,
+        personal_code: personal_code,
+        first_name: first_name,
+        last_name: last_name,
         phone: auth['phone'],
         phone_calling_code: auth['phone_calling_code'],
         auth_provider: 'mobileid' # User::MOBILEID
@@ -123,7 +122,7 @@ module MobileId
         raise Error, message
       end
 
-      @user_cert = MobileId::Cert.new(response['cert'], live:)
+      @user_cert = MobileId::Cert.new(response['cert'], live: live)
       @user_cert.verify_signature!(response['signature']['value'], doc)
       self.user_cert = @user_cert
     end
@@ -159,6 +158,5 @@ module MobileId
       user_cert.serial_number
     end
     alias personal_code serial_number
-
   end
 end
