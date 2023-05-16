@@ -1,3 +1,5 @@
+Release 0.0.13
+* More test friendly init
 * More precise sert check
 
 Release 0.0.12
