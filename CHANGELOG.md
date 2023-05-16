@@ -1,6 +1,6 @@
 Release 0.0.13
-* More test friendly init
-* More precise sert check
+* More test friendly init (thanks Juri Linkov)
+* More precise sert check (thanks Andri Möll)
 
 Release 0.0.12
 * Supports session RUNNING state

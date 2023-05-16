@@ -1,7 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'mobile_id'
   s.version     = '0.0.13'
-  s.date        = '2020-10-15'
   s.summary     = "Estonia Mobile ID authentication"
   s.description = "Estonia Mobile ID authentication"
   s.authors     = ["Priit Tark"]
@@ -15,4 +14,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'activesupport'
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'pry'
+  s.metadata    = {
+    "changelog_uri" => "https://github.com/domify/mobile_id/blob/main/CHANGELOG.md"
+  }
 end
