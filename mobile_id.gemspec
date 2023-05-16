@@ -14,6 +14,8 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'activesupport'
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'pry'
+  s.add_development_dependency 'rubocop'
+  s.add_development_dependency 'rubocop-rspec'
   s.metadata    = {
     "changelog_uri" => "https://github.com/domify/mobile_id/blob/main/CHANGELOG.md"
   }
