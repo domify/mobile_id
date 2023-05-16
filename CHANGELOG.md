@@ -1,3 +1,6 @@
+Release 0.0.15
+* Restored older Ruby 2.7 support
+
 Release 0.0.14
 * Added LT locale with locale init update (thanks Mijora)
 * Init rubocop (thanks Thales Ribeiro)
