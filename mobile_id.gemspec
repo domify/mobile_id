@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name        = 'mobile_id'
-  s.version     = '0.0.13'
-  s.summary     = 'Estonia Mobile ID authentication'
-  s.description = 'Estonia Mobile ID authentication'
+  s.version     = '0.0.14'
+  s.summary     = 'Estonia and Lithuania Mobile ID authentication'
+  s.description = 'Ruby client for Estonia and Lithuania Mobile ID authentication'
   s.authors     = ['Priit Tark']
-  s.email       = 'priit@gitlab.eu'
+  s.email       = 'priit@domify.io'
   s.files       = Dir.glob('{lib}/**/*') + %w[MIT-LICENSE README.md CHANGELOG.md]
   s.homepage    = 'https://github.com/domify/mobile_id'
   s.license     = 'MIT'
