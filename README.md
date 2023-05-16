@@ -117,7 +117,7 @@ After checking out the repo, run `bundle` to install dependencies. For testing c
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/gitlabeu/mobile_id
+Bug reports and pull requests are welcome on GitHub at https://github.com/domify/mobile_id
 
 ## Roadmap
 
@@ -130,4 +130,4 @@ The gem is available as open source under the terms of the [MIT License](http://
 
 ## Sponsors
 
-Gem development and testing is sponsored by [GiTLAB](https://gitlab.eu).
+Gem development and testing is sponsored by [Domify](https://domify.io).
