@@ -114,6 +114,8 @@ After checking out the repo, run `bundle` to install dependencies. For testing c
 * Priit Tark
 * Andri Möll for pointing out user signature issue and cert date check
 * Juri Linkov for pointing out unpack method issue and test friendly init
+* Thales Ribeiro for rubocop initial
+* Mijora for LT locale
 
 ## Contributing
 

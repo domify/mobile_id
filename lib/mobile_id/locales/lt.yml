@@ -1,0 +1,10 @@
+lt:
+  mobile_id:
+    some_error: Įvyko klaida
+    timeout: "M-parašo sesija pasibaigė"
+    user_is_not_mobile_id_client: Vartotojas nėra m-parašo klientas.
+    user_cancelled: Vartotojas nutraukė m-parašo operaciją.
+    signature_hash_mismatch: "M-parašo turi problemą. Vartotojas turėtų kreiptis į savo operatorių."
+    phone_absent: m-parašo SIM nepasiekiama.
+    delivery_error: m-parašo SMS siuntimo klaida.
+    sim_error: Neteisingas atsakymas iš m-parašo SIM kortelės

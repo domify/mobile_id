@@ -5,6 +5,7 @@ require 'digest'
 require 'httparty'
 require 'active_support/core_ext/hash/indifferent_access'
 require 'i18n'
+
 if defined?(Rails)
   require 'mobile_id/railtie'
 else
@@ -14,7 +15,7 @@ end
 module MobileId
   class Error < StandardError; end
 
-  LOCALES = %i[en et ru].freeze
+  LOCALES = %i[en et lt ru].freeze
 end
 
 require 'mobile_id/cert'

@@ -1,4 +1,9 @@
+Release 0.0.14
+* Added LT locale with locale init update (thanks Mijora)
+* Init rubocop (thanks Thales Ribeiro)
+
 Release 0.0.13
+* Gems updated to latest
 * More test friendly init (thanks Juri Linkov)
 * More precise sert check (thanks Andri Möll)
 
